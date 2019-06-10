@@ -7,15 +7,7 @@ events {
   worker_connections <%= worker_connections %>;
 }
 
-
 http {
-
-  server {
-    listen <%= port %> reuseport;
-    server_name blueskycards.com;
-    return 301 $scheme://www.blueskycards.com$request_uri;
-  }
-
   gzip on;
   gzip_comp_level 6;
   gzip_min_length 512;
@@ -39,6 +31,12 @@ http {
 
   #Must read the body in 5 seconds.
   client_body_timeout 5;
+
+  server {
+    listen <%= port %> reuseport;
+    server_name blueskycards.com;
+    return 301 $scheme://www.blueskycards.com$request_uri;
+  }
 
   server {
     listen <%= port %> reuseport;
