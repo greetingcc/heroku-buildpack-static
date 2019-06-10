@@ -61,9 +61,14 @@ http {
 
   <% if https_only %>
     if ($http_x_forwarded_proto != "https") {
-      return 301 https://$host$request_uri;
+      return 301 https://www.blueskycards.com$request_uri;
     }
   <% end %>
+
+    # global non-WWW HTTPS handler
+    if ($http_host = blueskycards.com){
+        return 303 https://www.blueskycards.com$request_uri;
+    }
 
   <% routes.each do |route, path| %>
     location ~ ^<%= route %>$ {
