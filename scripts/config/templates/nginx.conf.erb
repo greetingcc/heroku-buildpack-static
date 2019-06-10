@@ -34,6 +34,14 @@ http {
 
   server {
     listen <%= port %> reuseport;
+    server_name blueskycards.com;
+    return 301 $scheme://www.blueskycards.com$request_uri;
+  }
+
+
+  server {
+    server_name www.blueskycards.com
+    listen <%= port %> reuseport;
     charset <%= encoding %>;
     port_in_redirect off;
     keepalive_timeout 5;
